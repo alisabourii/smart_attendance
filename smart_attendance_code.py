@@ -1,15 +1,14 @@
-import take_foto_code
-import found_faces
-import time
-from datetime import datetime
+from deepface import DeepFace 
 
-now = datetime.now()
-clock =now.strftime("%d/%m/%Y %H:%M:%S")
+ogrenci_listesi = ["Ali1234.jpg","Linus01.jpg","elon1.jpg"]
 
-take_foto_code.take_foto()
-time.sleep(0.5)
+kamera_fotolar = ["OzAbim2.jpg","3.jpg","elon2.jpg"]
 
-
-for i in range(1,3):
-    found_faces.found_face("filename{0}".format(i))
-    time.sleep(0.5)
+varOlan = []
+for foto in kamera_fotolar:
+  for i in range(len(ogrenci_listesi)-1):
+    rst = DeepFace.verify(img1_path = foto, img2_path = ogrenci_listesi[i])
+    vrf = rst["verified"]
+    if vrf == True:
+      varOlan.append(ogrenci_listesi[i])
+    print(varOlan)
