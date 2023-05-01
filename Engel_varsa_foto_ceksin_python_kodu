@@ -1,0 +1,20 @@
+import serial,time
+import take_foto_code
+ser=serial.Serial('com3',9600,timeout=0.1)
+
+time.sleep(2.0)
+
+
+                       
+while True:
+    b = ser.readline()         # read a byte string
+    string_n = b.decode()  # decode byte string into Unicode  
+    string = string_n.rstrip() # remove \n and \r
+            
+    if string == "A":
+        print(string)
+        take_foto_code.take_foto()
+        time.sleep(0.1)            # wait (sleep) 0.1 seconds
+
+ser.close()
+
